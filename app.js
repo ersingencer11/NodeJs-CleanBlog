@@ -6,7 +6,7 @@ const Blog = require('./models/Blog')
 
 //MIDDLEWARE
 app.use(express.static('public'))
-app.use(express.urlencoded({extended:true})) //Formdan veri almak için
+app.use(express.urlencoded({ extended: true })) //Formdan veri almak için
 app.use(express.json()) //Formdan veri almak için
 
 //TEMPLATE ENGINE
@@ -29,7 +29,10 @@ app.post('/blogs', async (req, res) => {
   await Blog.create(req.body)
   res.redirect('/')
 })
-
+app.get('/posts/:id', async (req, res) => {
+  const post = await Blog.findById(req.params.id)
+  res.render('post', { post })
+})
 
 //SERVER LISTEN
 const port = 3000
