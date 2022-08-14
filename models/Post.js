@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-mongoose.connect('mongodb://localhost/CleanBlog-db', {
+mongoose.connect('mongodb+srv://ersin:database@cluster0.xzcixfs.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-
+}).then(()=>{
+  console.log('DB CONNECTED')
+}).catch((err)=>{
+  console.log(err)
 })
 
 const postSchema = new Schema({
