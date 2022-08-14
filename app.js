@@ -30,7 +30,7 @@ app.delete('/posts/:id', postController.deletePost)
 app.get('/posts/edit/:id', postController.getPostEdit)
 
 //SERVER LISTEN
-const port = process.env.port || 3000
+const port = process.env.port || 5000
 app.listen(port, () => {
   console.log(`${port} portu dinleniyor`)
 })
