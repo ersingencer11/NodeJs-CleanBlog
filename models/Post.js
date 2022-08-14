@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-mongoose.connect('mongodb+srv://ersin:database@cluster0.xzcixfs.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect("mongodb+srv://ersin:database@cluster0.xzcixfs.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(()=>{
