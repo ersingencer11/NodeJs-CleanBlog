@@ -2,37 +2,32 @@ const express = require('express')
 const path = require('path')
 const ejs = require('ejs')
 const app = express()
-const Blog = require('./models/Blog')
+const Post = require('./models/Post')
+const postController = require('./controller/postControllers')
+const pageController = require('./controller/pageControllers')
+const methodOverride = require('method-override')
 
 //MIDDLEWARE
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true })) //Formdan veri almak için
 app.use(express.json()) //Formdan veri almak için
+app.use(methodOverride('_method',{
+  methods:['POST','GET']
+}))
 
 //TEMPLATE ENGINE
 app.set('view engine', 'ejs')
 
 //ROUTING
-app.get('/', async (req, res) => {
-  const blogs = await Blog.find()
-  res.render('index', { blogs })
-})
-app.get('/about', (req, res) => {
-  res.render('about')
-})
-app.get('/add_post', (req, res) => {
-  res.render('add_post')
-})
+app.get('/about', pageController.getAboutPage)
+app.get('/add_post', pageController.getAddPostPage)
 
-//DATABASE
-app.post('/blogs', async (req, res) => {
-  await Blog.create(req.body)
-  res.redirect('/')
-})
-app.get('/posts/:id', async (req, res) => {
-  const post = await Blog.findById(req.params.id)
-  res.render('post', { post })
-})
+app.get('/', postController.getAllPosts)
+app.post('/createPost', postController.createPost)
+app.get('/posts/:id', postController.getPost)
+app.put('/posts/:id', postController.updatePost)
+app.delete('/posts/:id', postController.deletePost)
+app.get('/posts/edit/:id', postController.getPostEdit)
 
 //SERVER LISTEN
 const port = 3000

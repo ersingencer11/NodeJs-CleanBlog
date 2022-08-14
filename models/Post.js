@@ -4,9 +4,10 @@ const Schema = mongoose.Schema
 mongoose.connect('mongodb://localhost/CleanBlog-db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+
 })
 
-const blogSchema = new Schema({
+const postSchema = new Schema({
   title: String,
   message: String,
   dateCreated: {
@@ -15,6 +16,6 @@ const blogSchema = new Schema({
   },
 })
 
-const Blog = mongoose.model('blogs', blogSchema) //Blog collection'ın ismi
+const Post = mongoose.model('posts', postSchema) //Blog collection'ın ismi
 
-module.exports = Blog
+module.exports = Post
